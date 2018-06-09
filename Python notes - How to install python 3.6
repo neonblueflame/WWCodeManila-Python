@@ -1,0 +1,34 @@
+Installing Python 3.6 from testing in Ubuntu
+20180609
+
+NOTE: Packages under the test repo are experimental and are not recommended for installation as it is hard to undo
+
+Open sources.list file
+1. sudo [file editor] /etc/apt/sources.list
+* File editor can be nano, vi, notepadqq, etc.
+
+2. Add this line in sources.list
+# Ubuntu test repository (inclues Python 3.6 package)
+deb http://ftp.de.debian.org/debian testing main
+
+3. Check if 00local file exists
+cd /etc/apt/apt.conf.d
+ll -s
+
+4. If 00local doesn't exist, create the file
+sudo touch 00local
+
+5. Add 'APT::Default-Release "stable";' via tee
+echo 'APT::Default-Release "stable";' | sudo tee -a /etc/apt/apt.conf.d/00local
+
+6. Update PPA repository list
+sudo apt-get update
+
+7. Install Python 3.6 from test
+sudo apt-get -t testing install python3.6
+
+The following (experimental) packages will be installed:
+libc-l10n locales libc6-dbg libc-dev-bin libc6-dev libc6 libc-bin gcc-8-base libgcc1 debconf-i18n debconf libapparmor-perl libuuid-perl libtext-iconv-perl libtext-charwidth-perl libapt-pkg-perl perl-base liblocale-gettext-perl libstdc++6 init libgstreamer1.0-0 gstreamer1.0-tools libssl1.1 libpython3.6-minimal python3.6-minimal python3-pil python3-brlapi python3-reportlab-accel python3-renderpm python3-pycurl python3-lxml python3-gi-cairo python3-gi python3-gdbm python3-dbus python3-cups python3-cairo onboard python3-minimal python3 python3-olefile libjpeg62-turbo libwebp6 libwebpdemux2 libwebpmux3 libgnutls-openssl27 libunistring2 libidn2-0 libtasn1-6 libgnutls30 libgdbm5 onboard-common libcanberra0 libhunspell-1.6-0 libtinfo6 libncursesw6 libreadline7 libpython3.6-stdlib python3.6 libpython3-stdlib libgpg-error0 libgcrypt20 libselinux1 libmount1 libseccomp2 pciutils libpci3 binutils binutils-common libbinutils binutils-x86-64-linux-gnu gcc-7-base libisl19 libmpc3 libmpfr6 cpp-7 cpp libfontconfig1 fontconfig-config libcc1-0 libgomp1 libitm1 libatomic1 libasan4 liblsan0 libtsan0 libubsan0 libcilkrts5 libmpx2 libquadmath0 libgcc-7-dev gcc-7 gcc libstdc++-7-dev g++-7 g++ libsane-hpaio hplip-data libcolord2 libgssapi-krb5-2 libkrb5-3 libk5crypto3 libkrb5support0 libsoup2.4-1 libgdata22 libnewt0.52 libnm0 parted libparted2 printer-driver-hpcups rfkill
+
+8. After installation, check if Python 3.6 is installed by checking its version
+python3.6 -V
